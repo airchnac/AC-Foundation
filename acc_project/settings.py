@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,8 +127,15 @@ import os
 
 # 用户访问媒体文件的URL路径
 MEDIA_URL = '/media/'
-
+# 新增这一行：这是在生产环境中，所有静态文件将被集中收集到的一个文件夹的路径
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # 媒体文件在服务器上的物理存储根路径
 # os.path.join(BASE_DIR, 'media') 的意思是，
 # 在您的项目根目录(acc_foundation)下创建一个名为'media'的文件夹来存放文件。
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 新增这个设置
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
