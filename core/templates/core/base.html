@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ACC基金会{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+{# 这是 base.html 文件中正确的 header 部分 #}
+<header class="main-header">
+    <nav class="main-nav container">
+        <a href="{% url 'core:homepage' %}" class="logo">
+    <img src="{% static 'core/images/logo.png' %}" alt="ACC基金会 Logo" style="height: 40px; width: auto; vertical-align: middle;">
+</a>
+
+       
+<ul class="nav-links">
+    <li><a href="{% url 'core:homepage' %}">首页</a></li>
+    <li><a href="{% url 'core:post_list' %}">新闻动态</a></li>
+    <li><a href="{% url 'core:project_list' %}">核心项目</a></li>
+    <li><a href="{% url 'core:contact' %}">联系我们</a></li> {# <-- 新增这一行 #}
+</ul>
+        {# 这是唯一的搜索表单 #}
+        <form action="{% url 'core:search_results' %}" method="get" class="search-form">
+            <input type="text" name="q" placeholder="搜索站内信息...">
+            <button type="submit">搜索</button>
+        </form>
+    </nav>
+</header>
+
+    <main class="content-wrapper">
+        {% block content %}
+        {# 子模板的内容将会填充到这里 #}
+        {% endblock %}
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 ACC基金会. 保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+</html>

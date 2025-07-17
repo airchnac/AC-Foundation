@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ project.name }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <article class="card">
+        <header class="card-header">
+            <h1 style="color: #28a745;">{{ project.name }}</h1>
+            {# --- 新增图片展示区 --- #}
+            {% if project.cover_image %}
+                <img src="{{ project.cover_image.url }}" alt="{{ project.name }} 封面图片" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 1em;">
+            {% endif %}
+            {# --- 结束新增 --- #}
+
+            <div class="meta">
+                <strong>状态:</strong> {{ project.get_status_display }} | 
+                <strong>开发者/团队:</strong> {{ project.developer_info }}
+            </div>
+        </header>
+        <section class="card-body">
+            {% if project.grant_amount %}
+                <p><strong>资助金额:</strong> ${{ project.grant_amount|floatformat:2 }}</p>
+            {% endif %}
+            {% if project.start_date %}
+                <p><strong>开始日期:</strong> {{ project.start_date|date:"Y年m月d日" }}</p>
+            {% endif %}
+            <hr>
+            {{ project.description|linebreaks }}
+        </section>
+         {# --- 新增附件下载链接 --- #}
+        {% if post.attachment %}
+            <footer style="margin-top: 2em; padding: 1em; background-color: #e9ecef; border-radius: 5px;">
+                <strong>相关附件下载:</strong>
+                <a href="{{ post.attachment.url }}" download>{{ post.attachment.name|cut:"post_attachments/" }}</a>
+            </footer>
+        {% endif %}
+        {# --- 结束新增 --- #}
+    </article>
+
+    <a href="{% url 'core:project_list' %}" class="back-link">&larr; 返回项目列表</a>
+</div>
+{% endblock %}

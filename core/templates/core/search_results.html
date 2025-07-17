@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% block title %}搜索结果: {{ query }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>搜索结果</h1>
+
+    {% if query %}
+        <p>您搜索的关键词是: "<strong>{{ query }}</strong>"</p>
+    {% else %}
+        <p>请输入关键词进行搜索。</p>
+    {% endif %}
+    <hr>
+
+    {# 显示找到的文章 #}
+    <h3>相关文章</h3>
+    {% for post in posts %}
+        <article class="list-item">
+            <h4><a href="{% url 'core:post_detail' pk=post.pk %}">{{ post.title }}</a></h4>
+            <p>{{ post.content|truncatewords:20 }}...</p>
+        </article>
+    {% empty %}
+        <p>没有找到相关的文章。</p>
+    {% endfor %}
+
+    {# 显示找到的项目 #}
+    <h3 style="margin-top: 2em;">相关项目</h3>
+    {% for project in projects %}
+        <article class="list-item">
+            <h4><a href="{% url 'core:project_detail' pk=project.pk %}">{{ project.name }}</a></h4>
+            <p>{{ project.description|truncatewords:20 }}...</p>
+        </article>
+    {% empty %}
+        <p>没有找到相关的项目。</p>
+    {% endfor %}
+</div>
+{% endblock %}

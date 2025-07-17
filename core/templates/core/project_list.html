@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block title %}生态激励项目 - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="color: #28a745; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">生态激励项目</h1>
+
+    {% for project in projects %}
+        <article class="list-item">
+            <h2><a href="{% url 'core:project_detail' pk=project.pk %}">{{ project.name }}</a></h2>
+            <div class="meta">
+                <strong>状态:</strong> {{ project.get_status_display }}
+                {% if project.start_date %} | <strong>开始日期:</strong> {{ project.start_date|date:"Y-m-d" }}{% endif %}
+            </div>
+            {% if project.cover_image %}
+                <img src="{{ project.cover_image.url }}" alt="{{ project.name }}">
+            {% endif %}
+            <p>{{ project.description|truncatewords:40 }}</p>
+            <div style="clear: both;"></div>
+        </article>
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if projects.has_previous %}
+                <a href="?page=1">&laquo; 首页</a>
+                <a href="?page={{ projects.previous_page_number }}">上一页</a>
+            {% endif %}
+
+            <span class="current-page">
+                第 {{ projects.number }} 页 / 共 {{ projects.paginator.num_pages }} 页
+            </span>
+
+            {% if projects.has_next %}
+                <a href="?page={{ projects.next_page_number }}">下一页</a>
+                <a href="?page={{ projects.paginator.num_pages }}">末页 &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
