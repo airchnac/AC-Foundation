@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+# settings.py 文件顶部
+from pathlib import Path
+import os
+from dotenv import load_dotenv
 
+load_dotenv() # 读取 .env 文件中的变量
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,14 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wzc8r2d7=!j0dcunl=3tian(@)a-_k0t!y!j-r7jj#3p0b^0dk'
+# settings.py 文件中
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# 从环境变量中读取SECRET_KEY
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = []
+# 从环境变量中读取DEBUG状态，如果.env里没有定义，则默认为'False'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
+# 从环境变量中读取ALLOWED_HOSTS，并将其从一个字符串解析成一个列表
+allowed_hosts_str = os.getenv('ALLOWED_HOSTS')
+if allowed_hosts_str:
+    ALLOWED_HOSTS = allowed_hosts_str.split(',')
+else:
+    ALLOWED_HOSTS = []
 
 # Application definition
 
