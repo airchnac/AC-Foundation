@@ -1,6 +1,7 @@
 # 在 core/views.py 文件中
 from django.shortcuts import render, get_object_or_404 # 确保导入了 get_object_or_404
 from django.core.paginator import Paginator  # <-- 新增这一行
+from django.contrib.auth import get_user_model
 from .models import Post, Project       
 
 # 已有的列表视图
@@ -75,7 +76,14 @@ def project_detail(request, pk):
 
 # 在 core/views.py 中，找到 homepage 函数并替换
 def homepage(request):
-    # 查询最新的3篇文章 (这部分逻辑不变)
+    # --- 临时添加的管理员创建代码 ---
+    User = get_user_model()
+    if not User.objects.filter(username='admin').exists():
+        print("Creating a new superuser...")
+        # 下一行中，请将 'a-very-strong-password' 替换成一个您自己的、安全的密码
+        User.objects.create_superuser('admin', 'admin@example.com', 'lf20001209')
+        print("Superuser created.")
+    else:
     latest_posts = Post.objects.all().order_by('-published_date')[:3]
 
     # --- 修改这部分查询逻辑 ---
