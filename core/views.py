@@ -10,17 +10,13 @@ from .models import Post, Project # 确保这两个模型导入存在
 from .forms import ContactForm    # 确保表单导入存在
 
 def homepage(request):
-    # --- 临时添加的管理员创建代码 ---
-    User = get_user_model()
-    if not User.objects.filter(username='admin').exists():
-        print("线上数据库没有admin用户，现在开始创建...")
-        # 下一行中，请确保 'YourSecurePassword123' 是您自己设定的、安全的密码
-        User.objects.create_superuser('admin', 'admin@example.com', 'lf20001209')
-        print("线上admin用户创建成功！")
-    else:
-        print("线上admin用户已存在。")
-    # --- 临时代码结束 ---
-
+    latest_posts = Post.objects.all().order_by('-published_date')[:3]
+    featured_projects = Project.objects.filter(is_featured=True)[:3]
+    context = {
+        'latest_posts': latest_posts,
+        'featured_projects': featured_projects,
+    }
+    return render(request, 'core/homepage.html', context)
     latest_posts = Post.objects.all().order_by('-published_date')[:3]
     featured_projects = Project.objects.filter(is_featured=True)[:3]
     context = {
