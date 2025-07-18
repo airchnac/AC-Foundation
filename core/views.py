@@ -1,22 +1,13 @@
-# 这是 core/views.py 文件的完整、正确版本
-
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponse
-from django.contrib.auth import get_user_model # 确保这个导入存在
+from django.contrib.auth import get_user_model
 
-from .models import Post, Project # 确保这两个模型导入存在
-from .forms import ContactForm    # 确保表单导入存在
+from .models import Post, Project
+from .forms import ContactForm
 
 def homepage(request):
-    latest_posts = Post.objects.all().order_by('-published_date')[:3]
-    featured_projects = Project.objects.filter(is_featured=True)[:3]
-    context = {
-        'latest_posts': latest_posts,
-        'featured_projects': featured_projects,
-    }
-    return render(request, 'core/homepage.html', context)
     latest_posts = Post.objects.all().order_by('-published_date')[:3]
     featured_projects = Project.objects.filter(is_featured=True)[:3]
     context = {
@@ -83,13 +74,7 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-            print(f"--- 收到新的联系信息 ---")
-            print(f"姓名: {name}")
-            print(f"邮箱: {email}")
-            print(f"内容: {message}")
+            # Email sending logic would go here in a real application
             return HttpResponse("<h1>感谢您的留言！</h1><p>我们已收到您的信息。</p><a href='/'>返回首页</a>")
     else:
         form = ContactForm()
