@@ -161,3 +161,295 @@ body {
 .search-form button:hover {
     background-color: #004494;
 }
+/* --- 新版导航栏与下拉菜单样式 --- */
+
+/* 让主导航项相对定位，为下拉菜单提供定位基准 */
+.nav-links li {
+    position: relative;
+}
+
+/* 下拉菜单默认样式：隐藏，绝对定位 */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* 出现在父菜单项正下方 */
+    left: 0;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 180px; /* 下拉菜单的最小宽度 */
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+/* 下拉菜单中的链接样式 */
+.dropdown-menu li a {
+    color: #333;
+    padding: 12px 16px;
+    display: block;
+    white-space: nowrap; /* 防止文字换行 */
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f4f4f4;
+}
+
+/* 鼠标悬停在主菜单项上时，显示对应的下拉菜单 */
+.nav-links li.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+/* 右侧行动区样式 */
+.nav-actions {
+    display: flex;
+    align-items: center;
+}
+
+.donate-button {
+    background-color: #ffc107;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+}
+.donate-button:hover {
+    background-color: #e0a800;
+}
+/* --- 新版页脚样式 (设计感增强版) --- */
+.main-footer {
+    padding: 4em 0 2em 0; /* 增加上下内边距，让页脚更舒展 */
+    font-size: 0.9em;
+    background-color: #212529; /* 尝试一个更深的背景色 */
+    color: #ced4da; /* 提高默认文字亮度 */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr; /* 调整列宽，给链接更多空间 */
+    gap: 2.5em;
+    margin-bottom: 2.5em;
+    padding-bottom: 2.5em;
+    border-bottom: 1px solid #495057; /* 边框颜色变深一些 */
+}
+
+.footer-column h4 {
+    color: #fff; /* 标题用纯白 */
+    margin-bottom: 1.5em; /* 增加标题和内容的间距 */
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.5px; /* 增加一点字母间距 */
+}
+
+.footer-logo {
+    height: 40px;
+    margin-bottom: 1em;
+}
+
+.footer-about p {
+    max-width: 300px;
+    color: #adb5bd; /* 使描述文字颜色稍暗，形成对比 */
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* 使用CSS多列布局，当内容足够时会自动分为两列 */
+    column-count: 2;
+    column-gap: 1em;
+}
+
+.footer-links li {
+    margin-bottom: 0.9em;
+    /* 防止列表项在列之间断开 */
+    break-inside: avoid;
+}
+
+.footer-links a {
+    color: #ced4da;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 5px; /* 悬停时增加一点左内边距，产生动感 */
+}
+
+.social-icons a {
+    color: #ced4da;
+    font-size: 1.6em;
+    margin-right: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: #fff;
+    transform: scale(1.1); /* 悬停时图标放大一点 */
+}
+
+.footer-bottom {
+    padding-top: 1.5em; /* 增加顶部间距 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+    color: #6c757d; /* 底部版权信息颜色更暗 */
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.footer-bottom a {
+    color: #adb5bd; /* 底部链接颜色稍亮 */
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+/* --- 全新首页样式 --- */
+
+/* 通用页面区块样式 */
+.page-section {
+    padding: 4em 0;
+}
+.gray-bg {
+    background-color: #f8f9fa;
+}
+.text-center {
+    text-align: center;
+}
+.page-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    color: #333;
+}
+.section-link {
+    display: inline-block;
+    margin-top: 2em;
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+/* 1. Hero Section */
+.hero-section {
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    padding: 6em 0;
+}
+.hero-section h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+}
+.hero-section .subtitle {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 1em auto 2em auto;
+    opacity: 0.9;
+}
+.cta-buttons .btn {
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: all 0.2s ease-in-out;
+}
+.btn-primary {
+    background-color: #ffc107;
+    color: #333;
+}
+.btn-primary:hover {
+    background-color: #e0a800;
+}
+.btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+.btn-secondary:hover {
+    background-color: white;
+    color: #0056b3;
+}
+
+/* 2 & 3. Data Cards */
+.data-card {
+    background: white;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+.data-card.large {
+    max-width: 400px;
+    margin: 2em auto;
+}
+.data-card-value {
+    font-size: 3em;
+    font-weight: 700;
+    color: #0056b3;
+}
+.data-card.large .data-card-value {
+    font-size: 5em;
+}
+.data-card-label {
+    font-size: 1.1em;
+    color: #6c757d;
+    margin-top: 0.5em;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5em;
+}
+
+/* 4 & 5. Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+    text-align: left;
+}
+.feature-card {
+    background: white;
+    padding: 2em;
+    border-radius: 8px;
+}
+.feature-card i {
+    font-size: 2.5em;
+    color: #0056b3;
+    margin-bottom: 0.5em;
+}
+.feature-card h3 {
+    font-size: 1.5em;
+}
+.feature-card .card-link {
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1em;
+}
+
+/* 6. 最新动态 */
+.posts-list {
+    text-align: left;
+}
+.post-summary {
+    border-bottom: 1px solid #eee;
+    padding: 1.5em 0;
+}
+.post-summary:last-child {
+    border-bottom: none;
+}
+.post-summary h3 a {
+    text-decoration: none;
+    color: #333;
+}
